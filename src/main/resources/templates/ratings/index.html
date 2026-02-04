@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Staff Ratings</title>
+    <link rel="stylesheet" th:href="@{/css/app.css(v=1)}">
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div>
+            <div class="brand">Rate CS Teaching Staff</div>
+            <div class="muted">Share feedback on instructors and TAs.</div>
+        </div>
+        <a class="btn" th:href="@{/ratings/new}">Add Rating</a>
+    </div>
+
+    <div class="card" th:if="${successMessage}">
+        <span class="pill" th:text="${successMessage}"></span>
+    </div>
+
+    <div class="card">
+        <table class="table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Role</th>
+        <th>Overall Score</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="rating : ${ratings}">
+        <td th:text="${rating.name}">Name</td>
+        <td><span class="badge" th:text="${profileResolver.displayTitle(rating.roleType)}">Role</span></td>
+        <td class="score" th:text="${#numbers.formatDecimal(rating.overallScore, 1, 1)}">0.0</td>
+        <td>
+            <a th:href="@{/ratings/{id}(id=${rating.id})}">View</a>
+            <a th:href="@{/ratings/{id}/edit(id=${rating.id})}">Edit</a>
+            <form th:action="@{/ratings/{id}/delete(id=${rating.id})}" method="post" style="display:inline;">
+                <button class="btn danger" type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

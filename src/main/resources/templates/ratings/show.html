@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Staff Rating Detail</title>
+    <link rel="stylesheet" th:href="@{/css/app.css(v=1)}">
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div>
+            <div class="brand" th:text="${rating.name}">Name</div>
+            <span class="badge" th:text="${profileResolver.displayTitle(rating.roleType)}">Role</span>
+        </div>
+        <a class="btn secondary" th:href="@{/ratings}">Home</a>
+    </div>
+
+    <div class="card" th:if="${successMessage}">
+        <span class="pill" th:text="${successMessage}"></span>
+    </div>
+
+    <div class="grid grid-2">
+        <div class="card">
+            <div class="muted">Overall Score</div>
+            <div class="score" th:text="${#numbers.formatDecimal(rating.overallScore, 1, 1)}">0.0</div>
+            <p><strong>Email:</strong> <span th:text="${rating.email}">Email</span></p>
+        </div>
+        <div class="card">
+            <p><strong>Clarity:</strong> <span th:text="${rating.clarity}">0</span></p>
+            <p><strong>Niceness:</strong> <span th:text="${rating.niceness}">0</span></p>
+            <p><strong>Knowledgeable:</strong> <span th:text="${rating.knowledgeableScore}">0</span></p>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="muted">Comment</div>
+        <p th:text="${rating.comment}">None</p>
+    </div>
+
+    <div class="actions">
+        <a class="btn secondary" th:href="@{/ratings/{id}/edit(id=${rating.id})}">Edit</a>
+        <form th:action="@{/ratings/{id}/delete(id=${rating.id})}" method="post">
+            <button class="btn danger" type="submit">Delete</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

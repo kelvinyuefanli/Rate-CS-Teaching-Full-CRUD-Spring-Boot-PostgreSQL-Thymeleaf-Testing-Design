@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Staff Rating Form</title>
+    <link rel="stylesheet" th:href="@{/css/app.css(v=1)}">
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="brand" th:text="${rating.id == null} ? 'New Rating' : 'Edit Rating'">Form</div>
+        <a class="btn secondary" th:href="@{/ratings}">Home</a>
+    </div>
+
+    <div class="card">
+        <form th:action="${rating.id == null} ? @{/ratings} : @{/ratings/{id}(id=${rating.id})}"
+              th:object="${rating}"
+              method="post">
+            <div class="form-row">
+                <label for="name">Name</label>
+                <input type="text" th:field="*{name}" id="name">
+                <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+            </div>
+            <div class="form-row">
+                <label for="email">Email</label>
+                <input type="email" th:field="*{email}" id="email">
+                <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+            </div>
+            <div class="form-row">
+                <label for="roleType">Role</label>
+                <select th:field="*{roleType}" id="roleType">
+                    <option th:each="role : ${roleTypes}"
+                            th:value="${role}"
+                            th:text="${role}">
+                    </option>
+                </select>
+                <div class="error" th:if="${#fields.hasErrors('roleType')}" th:errors="*{roleType}"></div>
+            </div>
+            <div class="grid grid-2">
+                <div class="form-row">
+                    <label for="clarity">Clarity (1-10)</label>
+                    <input type="number" th:field="*{clarity}" id="clarity" min="1" max="10" placeholder="1-10">
+                    <div class="error" th:if="${#fields.hasErrors('clarity')}" th:errors="*{clarity}"></div>
+                </div>
+                <div class="form-row">
+                    <label for="niceness">Niceness (1-10)</label>
+                    <input type="number" th:field="*{niceness}" id="niceness" min="1" max="10" placeholder="1-10">
+                    <div class="error" th:if="${#fields.hasErrors('niceness')}" th:errors="*{niceness}"></div>
+                </div>
+                <div class="form-row">
+                    <label for="knowledgeableScore">Knowledgeable (1-10)</label>
+                    <input type="number" th:field="*{knowledgeableScore}" id="knowledgeableScore" min="1" max="10" placeholder="1-10">
+                    <div class="error" th:if="${#fields.hasErrors('knowledgeableScore')}" th:errors="*{knowledgeableScore}"></div>
+                </div>
+            </div>
+            <div class="form-row">
+                <label for="comment">Comment</label>
+                <textarea th:field="*{comment}" id="comment"></textarea>
+                <div class="error" th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}"></div>
+            </div>
+            <div class="actions">
+                <button class="btn" type="submit">Save</button>
+                <a class="btn secondary" th:href="@{/ratings}">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
