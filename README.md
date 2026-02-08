@@ -23,7 +23,3 @@ Full CRUD web application to manage ratings for CS teaching staff.
 3. Deploy the service (Java + Maven). Render will run `mvn clean package`.
 4. Set start command: `java -jar target/staff-rating-0.0.1-SNAPSHOT.jar`
 
-### Known Issues / Future Work
-
-- Add aggregated statistics per instructor (average across multiple ratings).
-- Improve UI styling and add delete confirmation modal.
