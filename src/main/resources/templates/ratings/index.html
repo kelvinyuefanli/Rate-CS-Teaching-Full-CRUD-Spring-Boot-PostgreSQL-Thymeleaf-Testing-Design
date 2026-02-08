@@ -37,7 +37,8 @@
         <td>
             <a th:href="@{/ratings/{id}(id=${rating.id})}">View</a>
             <a th:href="@{/ratings/{id}/edit(id=${rating.id})}">Edit</a>
-            <form th:action="@{/ratings/{id}/delete(id=${rating.id})}" method="post" style="display:inline;">
+            <form th:action="@{/ratings/{id}/delete(id=${rating.id})}" method="post" style="display:inline;"
+                  onsubmit="return confirm('Are you sure you want to delete this rating?');">
                 <button class="btn danger" type="submit">Delete</button>
             </form>
         </td>

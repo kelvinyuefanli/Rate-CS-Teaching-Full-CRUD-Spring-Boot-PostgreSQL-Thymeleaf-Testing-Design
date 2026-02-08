@@ -4,26 +4,27 @@ import ca.sfu.cmpt276.staffrating.model.RoleType;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Component
 public class StaffProfileResolver {
-    private final List<StaffMemberProfile> profiles;
+    private final Map<RoleType, StaffMemberProfile> profileMap;
 
-    public StaffProfileResolver() {
-        this.profiles = List.of(
-                new TaProfile(),
-                new ProfProfile()
-        );
+    public StaffProfileResolver(List<StaffMemberProfile> profiles) {
+        this.profileMap = profiles.stream()
+                .collect(Collectors.toUnmodifiableMap(
+                        StaffMemberProfile::supportedRole,
+                        profile -> profile,
+                        (existing, ignored) -> existing
+                ));
     }
 
     public String displayTitle(RoleType roleType) {
         if (roleType == null) {
             return "Unknown";
         }
-        return profiles.stream()
-                .filter(profile -> profile.supportedRole() == roleType)
-                .findFirst()
-                .map(StaffMemberProfile::displayTitle)
-                .orElse(roleType.name());
+        StaffMemberProfile profile = profileMap.get(roleType);
+        return profile == null ? roleType.name() : profile.displayTitle();
     }
 }

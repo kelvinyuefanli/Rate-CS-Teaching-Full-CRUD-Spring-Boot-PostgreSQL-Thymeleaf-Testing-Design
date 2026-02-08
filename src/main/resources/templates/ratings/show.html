@@ -39,7 +39,8 @@
 
     <div class="actions">
         <a class="btn secondary" th:href="@{/ratings/{id}/edit(id=${rating.id})}">Edit</a>
-        <form th:action="@{/ratings/{id}/delete(id=${rating.id})}" method="post">
+        <form th:action="@{/ratings/{id}/delete(id=${rating.id})}" method="post"
+              onsubmit="return confirm('Are you sure you want to delete this rating?');">
             <button class="btn danger" type="submit">Delete</button>
         </form>
     </div>

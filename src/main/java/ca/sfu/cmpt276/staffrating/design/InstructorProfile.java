@@ -4,14 +4,14 @@ import ca.sfu.cmpt276.staffrating.model.RoleType;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ProfProfile implements StaffMemberProfile {
+public class InstructorProfile implements StaffMemberProfile {
     @Override
     public String displayTitle() {
-        return "Professor";
+        return "Instructor";
     }
 
     @Override
     public RoleType supportedRole() {
-        return RoleType.PROF;
+        return RoleType.INSTRUCTOR;
     }
 }
