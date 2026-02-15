@@ -2,6 +2,8 @@
 
 Full CRUD web application to manage ratings for CS teaching staff.
 
+**Live demo:** [https://rate-cs-teaching-full-crud-spring-boot.onrender.com/ratings](https://rate-cs-teaching-full-crud-spring-boot.onrender.com/ratings)
+
 ### How to run locally
 
 1. Create a local Postgres database named `staff_rating`.
@@ -23,3 +25,10 @@ Full CRUD web application to manage ratings for CS teaching staff.
 3. Deploy the service (Java + Maven). Render will run `mvn clean package`.
 4. Set start command: `java -jar target/staff-rating-0.0.1-SNAPSHOT.jar`
 
+### AI Acknowledgement
+
+A coding agent (Cursor AI) was used to assist with implementation. Architecture, planning, and design decisions were done by me.
+
+### Future Work
+
+- Allow multiple ratings per staff member, with an aggregated average score displayed on the profile and each individual rating listed underneath.
