@@ -32,6 +32,19 @@ class StaffRatingRepositoryTest {
         assertThat(repository.findById(saved.getId())).isEmpty();
     }
 
+    @Test
+    void findByEmailReturnsMatch() {
+        StaffRating rating = buildRating("find-me@example.com");
+        repository.save(rating);
+
+        assertThat(repository.findByEmail("find-me@example.com")).isPresent();
+    }
+
+    @Test
+    void findByEmailReturnsEmptyWhenNotFound() {
+        assertThat(repository.findByEmail("nobody@example.com")).isEmpty();
+    }
+
     private StaffRating buildRating(String email) {
         StaffRating rating = new StaffRating();
         rating.setName("Kim Student");
